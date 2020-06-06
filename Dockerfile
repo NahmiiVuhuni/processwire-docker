@@ -12,12 +12,14 @@ RUN set -x \
     && apt-get -t unstable -y install nginx-full php7.4-fpm \
     && apt-get -y install openssl git curl vim htop \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log \
-    && curl https://raw.githubusercontent.com/Hubok/vimrc/master/vimrcs/basic.vim >> /root/.vimrc
+    && ln -sf /dev/stderr /var/log/nginx/error.log 
 
 RUN set -x \
-    && rm -rf /var/www/html /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* \
-    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/nginx-siteconfig.conf >> /etc/nginx/sites-enabled/processwire.conf \
+    && rm -rf /var/www/html /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* /etc/php/7.4/fpm/php.ini \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/.vimrc >> /root/.vimrc \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/nginx.conf >> /etc/nginx/nginx.conf.conf \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/nginx-siteconfig.conf >> /etc/nginx/sites-enabled/processwire.conf \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/php.ini >> /etc/php/7.4/fpm/php.ini \
     && git clone https://github.com/processwire/processwire.git /var/www/html \
     && chown -R nginx:nginx /var/www/html
 

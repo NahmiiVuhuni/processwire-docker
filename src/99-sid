@@ -1,0 +1,7 @@
+Package: *
+Pin: release a=stable
+Pin-Priority: 500
+
+Package: nginx-full php7.4-fpm
+Pin: release a=stable
+Pin-Priority: 100
