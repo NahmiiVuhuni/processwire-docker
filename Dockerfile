@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 
-LABEL maintainer="IDSX Docker Maintainers <docker-maint@hubok.net>"
+LABEL maintainer="Hubok <docker-maint@hubok.net>"
 
 RUN set -x \
     && echo "deb http://deb.debian.org/debian/ unstable main contrib" >> /etc/apt/sources.list.d/nginx.list \
