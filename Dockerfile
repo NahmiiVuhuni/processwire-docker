@@ -16,7 +16,7 @@ RUN set -x \
 
 RUN set -x \
     && rm -rf /var/www/html /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* /etc/php/7.4/fpm/php.ini \
-    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/.vimrc >> /root/.vimrc \
+    && curl https://raw.githubusercontent.com/amix/vimrc/master/vimrcs/basic.vim >> /root/.vimrc \
     && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/nginx.conf >> /etc/nginx/nginx.conf.conf \
     && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/nginx-siteconfig.conf >> /etc/nginx/sites-enabled/processwire.conf \
     && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/php.ini >> /etc/php/7.4/fpm/php.ini \
