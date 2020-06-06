@@ -12,7 +12,8 @@ RUN set -x \
     && apt-get -t unstable -y install nginx-full php7.4-fpm \
     && apt-get -y install openssl git curl vim htop \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log 
+    && ln -sf /dev/stderr /var/log/nginx/error.log \
+    && ln -sf /dev/stderr /var/log/php_errors.log
 
 RUN set -x \
     && rm -rf /var/www/html /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* /etc/php/7.4/fpm/php.ini \
