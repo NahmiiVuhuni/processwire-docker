@@ -13,13 +13,13 @@ RUN set -x \
     && apt-get -y install openssl git curl vim htop \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
-    && curl https://raw.githubusercontent.com/Hubok/vimrc/master/vimrcs/basic.vim >> /root/.vimrc \
-    && rm -rf /var/www/html/* /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* \
+    && curl https://raw.githubusercontent.com/Hubok/vimrc/master/vimrcs/basic.vim >> /root/.vimrc
+
+RUN set -x \
+    && rm -rf /var/www/html /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* \
     && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/nginx-siteconfig.conf >> /etc/nginx/sites-enabled/processwire.conf \
     && git clone https://github.com/processwire/processwire.git /var/www/html \
-    && chown -R nginx:nginx /var/www/html \
-    && mkdir -p /run/nginx \
-    && nginx -s reload
+    && chown -R nginx:nginx /var/www/html
 
 STOPSIGNAL SIGTERM
 
