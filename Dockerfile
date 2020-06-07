@@ -30,4 +30,6 @@ RUN set -x \
 
 STOPSIGNAL SIGTERM
 
+EXPOSE 80
+
 CMD ["nginx", "-g", "daemon off;"]
