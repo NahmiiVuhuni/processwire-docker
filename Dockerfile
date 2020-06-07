@@ -43,6 +43,8 @@ COPY config/nginx-siteconfig.conf /etc/nginx/sites-enabled/processwire.conf
 # Configure PHP-FPM
 COPY config/php.ini /etc/php/7.4/fpm/php.ini
 COPY config/php-www.conf /etc/php/7.4/fpm/pool.d/www.conf
+RUN set -x \
+    && mkdir /run/php
 
 # Download ProcessWire
 RUN set -x \
