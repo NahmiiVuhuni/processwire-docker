@@ -38,7 +38,7 @@ RUN set -x \
 
 # Configure Nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
-COPY config/nginx-siteconfig.conf /etc/nginx/sites-enabled/processwire.conf
+COPY config/nginx-siteconfig.conf /etc/nginx/conf.d/processwire.conf
 
 # Configure PHP-FPM
 COPY config/php.ini /etc/php/7.4/fpm/php.ini
