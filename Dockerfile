@@ -16,11 +16,14 @@ RUN set -x \
     && ln -sf /dev/stderr /var/log/php_errors.log
 
 RUN set -x \
-    && rm -rf /var/www/html /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* /etc/php/7.4/fpm/php.ini \
-    && curl https://raw.githubusercontent.com/amix/vimrc/master/vimrcs/basic.vim >> /root/.vimrc \
-    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/nginx.conf >> /etc/nginx/nginx.conf.conf \
-    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/nginx-siteconfig.conf >> /etc/nginx/sites-enabled/processwire.conf \
-    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/src/php.ini >> /etc/php/7.4/fpm/php.ini \
+    curl https://raw.githubusercontent.com/amix/vimrc/master/vimrcs/basic.vim >> /root/.vimrc
+
+RUN set -x \
+    && rm -rf /var/www/html /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* /etc/php/7.4/fpm/php.ini /etc/php/7.4/fpm/pool.d/www.conf \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/etc/nginx/nginx.conf >> /etc/nginx/nginx.conf \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/etc/nginx/sites-enabled/processwire.conf >> /etc/nginx/sites-enabled/processwire.conf \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/etc/php/7.4/fpm/php.ini >> /etc/php/7.4/fpm/php.ini \
+    && curl https://raw.githubusercontent.com/Hubok/processwire-docker/master/etc/php/7.4/fpm/pool.d/www.conf >> /etc/php/7.4/fpm/pool.d/www.conf \
     && git clone https://github.com/processwire/processwire.git /var/www/html \
     && chown -R nginx:nginx /var/www/html
 
