@@ -5,7 +5,7 @@ LABEL Maintainer="Hubok <docker-maint@hubok.net>" \
 
 ENV VERSION_PROCESSWIRE     3.0.148
 ENV VERSION_NGINX           1.19.0
-ENV VERSION_PHP             7.4.0
+ENV VERSION_PHP             7.4.6
 
 # Install required packages
 COPY config/gpg_nginx.key /root/gpg_nginx.key
@@ -23,7 +23,7 @@ RUN set -x \
     && apt-get -y upgrade \
     && addgroup --system --gid 101 nginx \
     && adduser --system --disabled-login --ingroup nginx --no-create-home --home /nonexistent --gecos "nginx user" --shell /bin/false --uid 101 nginx \
-    && apt-get install --no-install-recommends --no-install-suggests -y nginx=1.19.0* php7.4-fpm supervisor openssl git
+    && apt-get install --no-install-recommends --no-install-suggests -y nginx=${VERSION_NGINX}* php7.4-fpm=${VERSION_PHP}* php7.4-mysql=${VERSION_PHP}* php7.4-gd=${VERSION_PHP}* php7.4-zip=${VERSION_PHP}* supervisor git
 
 # Setup error logging
 RUN set -x \
@@ -48,16 +48,21 @@ RUN set -x \
 
 # Download ProcessWire
 RUN set -x \
-    && git clone -b '3.0.148' --single-branch https://github.com/processwire/processwire.git /var/www/html \
+    && git clone -b ${VERSION_PROCESSWIRE} --single-branch https://github.com/processwire/processwire.git /var/www/html \
     && chown -R nginx:nginx /var/www/html
 
 # Setup supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-STOPSIGNAL SIGTERM
+# Cleanup
+RUN set -x \
+    && apt-get -y purge gnupg1 git \
+    && apt-get clean
 
 EXPOSE 80
 
 WORKDIR /var/www/html
+
+STOPSIGNAL SIGTERM
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
