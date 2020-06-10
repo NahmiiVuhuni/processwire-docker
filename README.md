@@ -1,3 +1,3 @@
 # processwire-docker
 
-Not in a working state, expect frequent updates until I'm confident this is up to snuff.
+![master](https://github.com/Hubok/processwire-docker/workflows/master/badge.svg?branch=master) ProcessWire installer for Docker, running on Nginx and PHP 7.4 for Debian Buster.
